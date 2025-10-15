@@ -2,7 +2,7 @@
 #ifdef PHONEBOOK_H
 #include <iostream>
 #include <iomanip>
-
+#include <string>
 
 class Contact
 {
