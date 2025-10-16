@@ -28,10 +28,9 @@ void Phonebook::add()
     std::cin >> phone_number;
     std::cout << "please enter your dark secret :\n" << "darkest secret => ";
     std::cin >> darkest_secret;
-    contacts[index].setData(first_name,last_name,nickname,phone_number,darkest_secret);
     index++;
+    contacts[index % 8].setData(first_name,last_name,nickname,phone_number,darkest_secret);
 };
-
 
 
 std::string rmp_point(std::string str)
@@ -46,45 +45,41 @@ std::string rmp_point(std::string str)
 
 void Contact::getData()
 {
-    std::cout << "|" << std::setw(9) << rmp_point(first_name);
-    std::cout << "|" << std::setw(9) << rmp_point(last_name);
-    std::cout << "|" << std::setw(9) << rmp_point(nickname);
-    std::cout << "|" << std::setw(9) << rmp_point(phone_number);
-    std::cout << "|" << std::setw(9) << rmp_point(darkest_secret);
+    std::cout << "|" << std::setw(10) << rmp_point(first_name);
+    std::cout << "|" << std::setw(10) << rmp_point(last_name);
+    std::cout << "|" << std::setw(10) << rmp_point(nickname);
+    std::cout << "|" << std::setw(10) << rmp_point(phone_number);
+    std::cout << "|" << std::setw(10) << rmp_point(darkest_secret);
 
 }
-
-void Phonebook::Display()
+void Phonebook::search(int i)
 {
-    std::cout << "--------------------------------------------------------\n";
-    std::cout << "|" << std::setw(10) << "First Name"
-          << "|" << std::setw(10) << "Last Name"
-          << "|" << std::setw(10) << "Nickname"
-          << "|" << std::setw(10) << "Phone"
-          << "|" << std::setw(10) << "Secret" << "|\n";
-    std::cout << "--------------------------------------------------------\n";
-
-
-    for (int i = 0; i < index && i < 8; i++)
+    if(i > index)
     {
-        contacts[i].getData();
-        std::cout << "|" << std::endl;
+        std::cout << "this contact invalid please try again to another index !" << std::endl;
+        return;
     }
+    std::cout << "-------------------------------------------------------------------\n";
+    std::cout << "|" << std::setw(10) << "Index"
+        << "|" << std::setw(10) << "First Name"
+        << "|" << std::setw(10) << "Last Name"
+        << "|" << std::setw(10) << "Nickname"
+        << "|" << std::setw(10) << "Phone"
+        << "|" << std::setw(10) << "Secret" << "|\n";
+    std::cout << "-------------------------------------------------------------------\n";
+    std::cout << "|" << std::setw(10) << i;
+    contacts[i].getData();
+    std::cout << "|" << std::endl;
+    std::cout << "-------------------------------------------------------------------\n";
+};
 
-    std::cout << "--------------------------------------------------------\n";
-}
-
+void Phonebook::ft_exit()
+{
+    exit(1);
+};
 
 Phonebook::Phonebook(){};
 Phonebook::~Phonebook(){};
 
 Contact::Contact(){};
 Contact::~Contact(){};
-
-
-int main(int ac, char **av)
-{
-    Phonebook Pb;
-    Pb.add();
-    Pb.Display();
-}

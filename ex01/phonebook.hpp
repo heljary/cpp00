@@ -2,7 +2,7 @@
 #ifdef PHONEBOOK_H
 #include <iostream>
 #include <iomanip>
-#include <string>
+#include <cstring>
 
 class Contact
 {
@@ -27,7 +27,8 @@ private:
     static int index;
 public:
     void add();
-    void Display();
+    void search(int i);
+    void ft_exit();
     Phonebook();
     ~Phonebook();
 };
