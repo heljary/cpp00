@@ -1,15 +1,8 @@
 #include "phonebook.hpp"
 
 int Phonebook::index = 0;
-
-void Contact::setData(std::string fn,std::string ln,std::string nckn,std::string pn,std::string ds){
-    first_name = fn;
-    last_name = ln;
-    nickname = nckn;
-    phone_number = pn;
-    darkest_secret = ds;
-};
-
+int Phonebook::contactCount = 0;
+Phonebook::Phonebook(){};
 void Phonebook::add()
 {
     std::cout << "please add Contact" << std::endl;
@@ -28,35 +21,24 @@ void Phonebook::add()
     std::cin >> phone_number;
     std::cout << "please enter your dark secret :\n" << "darkest secret => ";
     std::cin >> darkest_secret;
-    index++;
-    contacts[index % 8].setData(first_name,last_name,nickname,phone_number,darkest_secret);
+    contacts[index].setData(first_name,last_name,nickname,phone_number,darkest_secret);
+    index = (index + 1) % MAX_CONTS;
+    if (contactCount < MAX_CONTS)
+        contactCount++;
+    std::cout << "index is : " << index << std::endl;
 };
 
-
-std::string rmp_point(std::string str)
-{
-    if(str.empty())
-        return "";
-    if(str.length() > 10)
-        return str.substr(0, 9) + '.';
-    else
-        return str;
-}
-
-void Contact::getData()
-{
-    std::cout << "|" << std::setw(10) << rmp_point(first_name);
-    std::cout << "|" << std::setw(10) << rmp_point(last_name);
-    std::cout << "|" << std::setw(10) << rmp_point(nickname);
-    std::cout << "|" << std::setw(10) << rmp_point(phone_number);
-    std::cout << "|" << std::setw(10) << rmp_point(darkest_secret);
-
-}
 void Phonebook::search(int i)
 {
-    if(i > index)
+    if(i < 0 || i >= MAX_CONTS)
     {
-        std::cout << "this contact invalid please try again to another index !" << std::endl;
+        std::cout << "Invalid index! Please enter an index between 0 and " << (MAX_CONTS - 1) << std::endl;
+        return;
+    }
+    if (i >= contactCount)
+    {
+        std::cout << "No contact at index " << i << "! Only " << contactCount 
+                  << " contact(s) have been added." << std::endl;
         return;
     }
     std::cout << "-------------------------------------------------------------------\n";
@@ -78,8 +60,4 @@ void Phonebook::ft_exit()
     exit(1);
 };
 
-Phonebook::Phonebook(){};
 Phonebook::~Phonebook(){};
-
-Contact::Contact(){};
-Contact::~Contact(){};
