@@ -17,31 +17,60 @@ int Phonebook::contactCount = 0;
 Phonebook::Phonebook(){};
 void Phonebook::add()
 {
+
     std::cout << "please add Contact" << std::endl;
     std::string first_name;
     std::string last_name;
     std::string nickname;
     std::string phone_number;
     std::string darkest_secret;
+    
     std::cout << "please enter your first name : " << std::endl;
     std::cin.ignore();
-    getline(std::cin,first_name);
+    if (!std::getline(std::cin, first_name)) {
+        std::cin.clear();
+        exit(1);
+    }
     std::cout << "please enter your last name : " << std::endl;
-    getline(std::cin,last_name);
+    if (!std::getline(std::cin, last_name)) {
+        std::cin.clear();
+        exit(1);
+    }
     std::cout << "please enter your nickname : " << std::endl;
-    getline(std::cin,nickname);
+    if (!std::getline(std::cin, nickname)) {
+        std::cin.clear();
+        exit(1);
+    }
     std::cout << "please enter your phone number : " << std::endl;
-    getline(std::cin,phone_number);
+    if (!std::getline(std::cin, phone_number)) {
+        std::cin.clear();
+        exit(1);
+    }
     std::cout << "please enter your dark secret : " << std::endl;
-    getline(std::cin,darkest_secret);
+    if (!std::getline(std::cin, darkest_secret)) {
+        std::cin.clear();
+        exit(1);
+    }
+    if (first_name.empty() || last_name.empty() || nickname.empty() ||
+    phone_number.empty() || darkest_secret.empty()) {
+        std::cout << "Error: one or more fields are empty. Contact not added.\n";
+        return;
+    }
     contacts[index].setData(first_name,last_name,nickname,phone_number,darkest_secret);
+    std::cout << "Contact added successfully!\n";
     index = (index + 1) % MAX_CONTS;
     if (contactCount < MAX_CONTS)
         contactCount++;
 };
 
-void Phonebook::search(int i)
+void Phonebook::search()
 {
+    int i;
+    std::cin >> i;
+    if(std::cin.fail())
+    {
+        exit(1);
+    }
     if(i < 0 || i >= MAX_CONTS)
     {
         std::cout << "Invalid index! Please enter an index between 0 and " << (MAX_CONTS - 1) << std::endl;
@@ -61,15 +90,10 @@ void Phonebook::search(int i)
         << "|" << std::setw(10) << "Phone"
         << "|" << std::setw(10) << "Secret" << "|\n";
     std::cout << "-------------------------------------------------------------------\n";
-    std::cout << "|" << std::setw(10) << i;
+    std::cout << "|" << std::left << std::setw(10) << i;
     contacts[i].getData();
     std::cout << "|" << std::endl;
     std::cout << "-------------------------------------------------------------------\n";
-};
-
-void Phonebook::ft_exit()
-{
-    exit(1);
 };
 
 Phonebook::~Phonebook(){};

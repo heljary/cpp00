@@ -12,7 +12,7 @@
 
 #define PHONEBOOK_H
 #ifdef PHONEBOOK_H
-#define MAX_CONTS 2
+#define MAX_CONTS 8
 #include "Contact.hpp"
 
 class Phonebook
@@ -23,8 +23,7 @@ private:
     static int contactCount;
 public:
     void add();
-    void search(int i);
-    void ft_exit();
+    void search();
     Phonebook();
     ~Phonebook();
 };

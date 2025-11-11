@@ -34,11 +34,11 @@ void Contact::setData(std::string fn,std::string ln,std::string nckn,std::string
 
 void Contact::getData()
 {
-    std::cout << "|" << std::setw(10) << rmp_point(first_name);
-    std::cout << "|" << std::setw(10) << rmp_point(last_name);
-    std::cout << "|" << std::setw(10) << rmp_point(nickname);
-    std::cout << "|" << std::setw(10) << rmp_point(phone_number);
-    std::cout << "|" << std::setw(10) << rmp_point(darkest_secret);
+    std::cout << "|" << std::left << std::setw(10) << rmp_point(first_name);
+    std::cout << "|" << std::left << std::setw(10) << rmp_point(last_name);
+    std::cout << "|" << std::left << std::setw(10) << rmp_point(nickname);
+    std::cout << "|" << std::left << std::setw(10) << rmp_point(phone_number);
+    std::cout << "|" << std::left << std::setw(10) << rmp_point(darkest_secret);
     
 }
 Contact::~Contact(){};
