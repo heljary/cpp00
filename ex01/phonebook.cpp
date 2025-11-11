@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 08:47:16 by heljary           #+#    #+#             */
+/*   Updated: 2025/11/11 08:47:17 by heljary          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "phonebook.hpp"
 
 int Phonebook::index = 0;
@@ -11,21 +23,21 @@ void Phonebook::add()
     std::string nickname;
     std::string phone_number;
     std::string darkest_secret;
-    std::cout << "please enter your first name :\n" << "first name => ";
-    std::cin >> first_name;
-    std::cout << "please enter your last name :\n" << "last name => ";
-    std::cin >> last_name;
-    std::cout << "please enter your nickname :\n" << "nick name => ";
-    std::cin >> nickname;
-    std::cout << "please enter your phone number :\n" << "phone number => ";
-    std::cin >> phone_number;
-    std::cout << "please enter your dark secret :\n" << "darkest secret => ";
-    std::cin >> darkest_secret;
+    std::cout << "please enter your first name : " << std::endl;
+    std::cin.ignore();
+    getline(std::cin,first_name);
+    std::cout << "please enter your last name : " << std::endl;
+    getline(std::cin,last_name);
+    std::cout << "please enter your nickname : " << std::endl;
+    getline(std::cin,nickname);
+    std::cout << "please enter your phone number : " << std::endl;
+    getline(std::cin,phone_number);
+    std::cout << "please enter your dark secret : " << std::endl;
+    getline(std::cin,darkest_secret);
     contacts[index].setData(first_name,last_name,nickname,phone_number,darkest_secret);
     index = (index + 1) % MAX_CONTS;
     if (contactCount < MAX_CONTS)
         contactCount++;
-    std::cout << "index is : " << index << std::endl;
 };
 
 void Phonebook::search(int i)
